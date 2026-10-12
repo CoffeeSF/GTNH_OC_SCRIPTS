@@ -8,7 +8,8 @@ local function exists(filename)
     return filesystem.exists(shell.getWorkingDirectory() .. "/" .. filename)
 end
 
-local repo = args and args[1]
+local args = shell.parse(...)
+local repo = args[1]
 if type(repo) ~= "string"
     or not repo:match("^https://raw%.githubusercontent%.com/")
     or repo:find("[^%w:/._%-]") then
