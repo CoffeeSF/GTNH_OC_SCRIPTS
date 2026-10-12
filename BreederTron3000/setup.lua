@@ -8,8 +8,14 @@ local function exists(filename)
     return filesystem.exists(shell.getWorkingDirectory() .. "/" .. filename)
 end
 
-local repo = "https://raw.githubusercontent.com/FrostyFire1/GTNH_OC_Scripts/";
-local branch = "master/BreederTron3000"
+local repo = args and args[1]
+if type(repo) ~= "string"
+    or not repo:match("^https://raw%.githubusercontent%.com/")
+    or repo:find("[^%w:/._%-]") then
+    print("Usage: setup <raw GitHub folder URL>")
+    os.exit()
+end
+repo = repo:gsub("/+$", "")
 
 for i = 1, #paths do
     if not filesystem.exists(shell.getWorkingDirectory() .. "/" .. paths[i]) then
@@ -22,7 +28,7 @@ for i = 1, #scripts do
         filesystem.remove(shell.getWorkingDirectory() .. "/" .. scripts[i]);
     end
 
-    shell.execute(string.format("wget %s%s/%s %s", repo, branch, scripts[i], scripts[i]));
+    shell.execute(string.format("wget %s/%s %s", repo, scripts[i], scripts[i]));
 end
 
 shell.execute("reboot");

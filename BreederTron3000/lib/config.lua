@@ -1,6 +1,6 @@
 local config = {}
 config.preference = {
-    ["Common"]= {"Forest","Meadows"},
+    ["Common"]= {"Forest","Wintry"},
     ["Oily"]= {"Ocean","Primeval"},
     ["Corroded"]= {"Wintry","Resilient"},
     ["Ruby"]= {"Redstone","Diamond"},
